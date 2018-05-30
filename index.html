@@ -41,21 +41,29 @@
 
 </head>
 <body>
+<div class="container">
+		<div class="header clearfix">
+				<nav>
+				  <ul class="nav nav-pills pull-right" id="myTab">
+					<li role="presentation" class="active"><a href="#home" id="home" data-toggle="tab">Home</a></li>
+					<li role="presentation"><a href="#mine" id="mine" data-toggle="tab">My</a></li>
+					<li role="presentation"><a href="#contact" data-toggle="tab">Contact</a></li>
+				  </ul>
+				</nav>
+				<h3 class="text-muted">星云扭蛋机</h3>
+		</div>
+
 <div class="bs-docs-header" id="content" tabindex="-1">
 		<div class="container">
 		  <h1>星云扭蛋机</h1>
-		  <p>点击GO按钮可以获得全网限量发行的球星卡哦,更有少量</p>  
+		  <p>点击GO按钮可以获得全网限量发行的球星卡哦</p>  
 		</div>
 </div>
-<ul class="nav nav-tabs" role="tablist">  
-		<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">游戏</a></li>  
-		<li role="presentation"><a href="#profile" role="tab" data-toggle="tab">我的奖品</a></li>    
-</ul>
 <div class="tab-content">   
-<div role="tabpanel" class="tab-pane" id="profile">
+<div role="tabpanel" class="tab-pane" id="mineTab">
+mine
 
-</div>
-<div role="tabpanel" class="tab-pane active" id="home" >
+<div role="tabpanel" class="tab-pane active" id="homeTab" >
 <div class="niu_danji">
 	<!--机器-->
 	<div class="game_qu">
@@ -147,11 +155,29 @@
 </div>
 </div>
 </div>
+
+<footer class="footer">
+	<p>© 2018 wasabi studio, Inc.</p>
+  </footer>
+  </div>
 <script src="lib/nebPay.min.js"></script>
 <script>
   var NebPay = require("nebpay");
   var nebPay = new NebPay();	
 $(document).ready(function(e) {
+	$('#myTab a').click(function (e) {
+            e.preventDefault();
+			var id = $(this)[0].id;
+			$('#mineTab').hide();
+			$('#homeTab').hide();
+			$('#'+id+'Tab').show();
+
+			// remove all active
+			$('#myTab').children().removeClass('active');
+			//$(this)[0]
+			$(this).parent().addClass('active')
+        });
+
 	//一等奖 关闭
 	$("#jianpin_one em img").click(function(){
 		$("#jianpin_one").hide();
