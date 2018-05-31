@@ -91,7 +91,7 @@
 	<!--机器-->
 	<div class="game_qu">
     	<!--go-->
-        <div class="game_go">0.01NAS/次</div>
+        <div class="game_go">0.001NAS/次</div>
          <div class="wdjifen"></div>
     </div>
     
@@ -125,7 +125,7 @@
 
 	 <div class="zonj_zezc none" id="walletCheck">
 		<div class="jpzs aiqiyi tc_anima">
-					<div id="contentDialog">    
+					<div class="contentDialog" id="cont2">    
 							<p>玩扭蛋机需要准备好钱包哦</p>        
 						<p>请先安装<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a></p>
 					</div>
@@ -137,7 +137,7 @@
 <div class="zonj_zezc none" id="jianpin_one">
 	<div class="jpzs aiqiyi tc_anima">
     	<em><img src="images/close.png"></em>
-        <div id="contentDialog"/>
+        <div class="contentDialog" id="cont1"/>
 	</div>
 </div>
 </div>
@@ -224,8 +224,9 @@ function draw(){
 	callArgs = JSON.stringify([""])
 	nebPay.call(dappAddress, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
           listener: function(resp){
-						$('#contentDialog').html('需要进行区块确认，这可能会花费几十秒钟的时间。</br>你可以在<a href="https://wallet.nasscan.io/check.html" target="_blank">https://wallet.nasscan.io/check.html</a>中</br>使用<code>'+resp.txhash+'</code>查询进度！');
-				}
+						$('#cont1').html('需要进行区块确认，这可能会花费几十秒钟的时间。</br>你可以在<a href="https://wallet.nasscan.io/check.html" target="_blank">https://wallet.nasscan.io/check.html</a>中</br>使用<code>'+resp.txhash+'</code>查询进度！');
+						$("#jianpin_one").show();
+					}
     });
 
 	for(i=1;i<=11;i++){
@@ -242,9 +243,6 @@ function draw(){
 		$(".zjdl").children("span").addClass("diaL_one");
 
 		$(".zjdl").removeClass("none").addClass("dila_Y");
-				setTimeout(function (){
-					$("#jianpin_one").show();
-				},900);
 		},1100)
 	
 	//取消动画

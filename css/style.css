@@ -86,7 +86,7 @@ a{
 
 .niu_danji .dan_gund span{ width:115px; height:115px;}
 
-div#contentDialog {
+div.contentDialog {
     margin: auto;
     position: relative;
     top: 30%;
@@ -97,7 +97,7 @@ div#contentDialog {
 	width:60%;
 }
 
-#walletCheck #contentDialog {
+#walletCheck .contentDialog {
 	width: 200px;
 }
 
