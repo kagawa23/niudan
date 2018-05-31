@@ -86,10 +86,24 @@ a{
 
 .niu_danji .dan_gund span{ width:115px; height:115px;}
 
+div#contentDialog {
+    margin: auto;
+    position: relative;
+    top: 30%;
+    width: 500px;
+}
+
+#walletCheck .jpzs {
+	width:60%;
+}
+
+#walletCheck #contentDialog {
+	width: 200px;
+}
 
 /*中奖*/
-.zonj_zezc{ width:640px; min-height:1039px; position:absolute; left:50%; top:0px; z-index:4;background:rgba(0,0,0,0.85); margin-left:-320px;}
-.zonj_zezc .jpzs{ width:450px; height:286px;   position:relative；-webkit-border-radius:10px;
+.zonj_zezc{ width:640px; min-height:1039px; position:absolute; left:50%; top:220px; z-index:4;background:rgba(0,0,0,0.85); margin-left:-320px;}
+.zonj_zezc .jpzs{ width:90%; height:286px;   position:relative；-webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px; background:#fff; margin:300px auto 0px auto; position:relative}
 .zonj_zezc .jpzs em{ height:95px; position:absolute; right:0px; top:-50px;}

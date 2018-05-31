@@ -109,11 +109,7 @@ BidderBoard.prototype = {
         if (Blockchain.transaction.from != this.ownerAddress) {
             throw new Error("Permission denied.");
         }
-       //  var zero = new BigNumber(0);
-       // var balance = this.balance;
-        // if(balance.isEqualTo(zero)){
-        //     throw new Error("no money to widthdraw.");
-        // }
+
         var result = Blockchain.transfer(this.ownerAddress, this.balance);
         if (!result) {
             throw new Error("Withdraw failed. Address:" + this.ownerAddress + ", NAS:" + this.balance);

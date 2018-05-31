@@ -124,16 +124,21 @@
 
    </div>
 
-
+	 <div class="zonj_zezc none" id="walletCheck">
+		<div class="jpzs aiqiyi tc_anima">
+					<div id="contentDialog">    
+							<p>玩扭蛋机需要准备好钱包哦</p>        
+						<p>请先安装<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a></p>
+					</div>
+		</div>
+	</div>
 
 
 <!--中奖 获得一等奖-->
 <div class="zonj_zezc none" id="jianpin_one">
 	<div class="jpzs aiqiyi tc_anima">
     	<em><img src="images/close.png"></em>
-        <h2>
-        	<b>恭喜你！<br>获得一等奖！</b>
-        </h2>
+        <div id="contentDialog"/>
 	</div>
 </div>
 </div>
@@ -148,16 +153,21 @@
   var NebPay = require("nebpay");
   var nebPay = new NebPay();	
 $(document).ready(function(e) {
+	var walletCheck = function(){
+            if (typeof(webExtensionWallet) === "undefined") {
+								$("#walletCheck").show()
+                return false;
+						}
+						$("#walletCheck").hide()
+            return true;
+	}
 	var dappAddress = 'n1ktHzcs9BQbHXqhx6w5G3KKtc9niWiTQFx';
 	var value = '0';
 	var callFunction = 'getMine';
 	var callArgs = JSON.stringify([""]);
-	var cards = [0,0,0,0,0,0,0,0,0,0]
-	nebPay.simulateCall(dappAddress, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
-                listener: function(resp){
-					var result = resp.result;
-                    var resultObj = JSON.parse(result);
-					for(var i=0;i<resultObj.length;i++){
+	var handleUI = function (resultObj){
+		var cards = [0,0,0,0,0,0,0,0,0,0]
+		for(var i=0;i<resultObj.length;i++){
 						var val = resultObj[i];
 						var idx = parseInt(val.drawNo,10);
 						cards[idx] = cards[idx] +1 ;
@@ -171,8 +181,20 @@ $(document).ready(function(e) {
 							$('#num'+i).html('x'+cardNum); 
 						}
 					}
+	}
+	walletCheck();
+	nebPay.simulateCall(dappAddress, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+                listener: function(resp){
+					var result = resp.result;
+					var resultObj =[];
+					try{
+						var resultObj = JSON.parse(result);
+						handleUI(resultObj);
+					}	catch(err){
+						handleUI(resultObj);
+					}
 				}
-        });
+    });
 	$('#myTab a').click(function (e) {
             e.preventDefault();
 			var id = $(this)[0].id;
@@ -198,6 +220,15 @@ $(".game_go").click(function(){
 	
 	
 function draw(){
+	value='0.001';
+	callFunction="draw";
+	callArgs = JSON.stringify([""])
+	nebPay.call(dappAddress, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+          listener: function(resp){
+						$('#contentDialog').html('需要进行区块确认，这可能会花费几十秒钟的时间。</br>你可以在<a href="https://wallet.nasscan.io/check.html" target="_blank">https://wallet.nasscan.io/check.html</a>中</br>使用<code>'+resp.txhash+'</code>查询进度！');
+				}
+    });
+
 	for(i=1;i<=11;i++){
 			$(".qiu_"+i).removeClass("diaol_"+i);
 			$(".qiu_"+i).addClass("wieyi_"+i);
