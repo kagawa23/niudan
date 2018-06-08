@@ -157,11 +157,11 @@ $(document).ready(function(e) {
             if (navigator.platform) return filter.indexOf(navigator.platform.toLowerCase()) < 0 ? true : false;
         };
        var  isInstalledWallet = function() {
-            if (!this.isMobile()) return window.webExtensionWallet !== undefined;
+            if (!isMobile()) return window.webExtensionWallet !== undefined;
             else return true;
         };
       var walletCheck = function(){
-            if (!this.isInstalledWallet()) {
+            if (!isInstalledWallet()) {
                 $("#walletCheck").show()
                 return false;
             }
