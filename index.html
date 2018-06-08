@@ -152,14 +152,22 @@
   var NebPay = require("nebpay");
   var nebPay = new NebPay();	
 $(document).ready(function(e) {
-	var walletCheck = function(){
-            if (typeof(webExtensionWallet) === "undefined") {
-								$("#walletCheck").show()
+	var isMobile = function() {
+            var filter = 'win16|win32|win64|mac|macintel';
+            if (navigator.platform) return filter.indexOf(navigator.platform.toLowerCase()) < 0 ? true : false;
+        };
+       var  isInstalledWallet = function() {
+            if (!this.isMobile()) return window.webExtensionWallet !== undefined;
+            else return true;
+        };
+      var walletCheck = function(){
+            if (!this.isInstalledWallet()) {
+                $("#walletCheck").show()
                 return false;
-						}
-						$("#walletCheck").hide()
+            }
+			$("#walletCheck").hide()
             return true;
-	}
+        };
 	var dappAddress = 'n1swm2FEzM4C1kq249pTgmT2aszme9aftj3';
 	var value = '0';
 	var callFunction = 'getMine';
